@@ -62,7 +62,6 @@ if __name__ == "__main__":
             # Set the "typing" status for the bot
             envoy_bot.set_typing_status(summary_receivers, llm_contexts_lock.locked)
 
-            logger.info("Hereeeeee")
             # Scrap messages for the given chat
             messages, chat_title = group_chat_scrapper.get_message_history(int(chat_cfg.id), chat_cfg.lookback_period_seconds)
 
