@@ -6,9 +6,11 @@ import logging
 from telethon.sync import TelegramClient
 from telethon.tl.types import User, Channel
 import telebot
+from config import *
 
 
 class GroupChatScrapper:
+    
     def __init__(self, telegram_api_id, telegram_api_hash):
         self.logger = logging.getLogger("CSB")
         # Here we are forced to use the Telegram API because bots cannot be added to group chats by anyone except admins
@@ -41,7 +43,9 @@ class GroupChatScrapper:
         datetime_from = self.get_datetime_from(lookback_period)
         # Warning: this probably won't work with the private group chats as those require joining beforehand
         # (public chats can be scrapped right away)
+        
         for message in self.client.iter_messages(chat_id):
+            
             if message.date < datetime_from:
                 break
             if not message.text:
@@ -134,3 +138,4 @@ class EnvoyBot:
                     return
                 self.chat_callback(message.text, sender, self.current_user_contexts[sender],
                                    lambda x: self.bot.send_message(message.chat.id, x))
+
